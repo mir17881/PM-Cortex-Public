@@ -1,0 +1,13 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Secrets (defense-in-depth — nothing sensitive should ever be here)
+*.env
+*.key
+*.keystore
+credentials*
+secrets/
+
+# Logs / local
+*.log
