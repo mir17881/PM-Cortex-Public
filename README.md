@@ -42,6 +42,29 @@ Skills and slash commands are discovered from your personal config directory:
 - **Skills** — make each skill folder discoverable under `~/.claude/skills/<name>/SKILL.md` (symlink/junction it, or copy it).
 - **Commands** — copy the workflow `.md` files into `~/.claude/commands/`.
 
+Copy-paste install from a clone of this repo:
+
+**Windows (PowerShell):**
+
+```powershell
+git clone https://github.com/mir17881/PM-Cortex-Public.git
+New-Item -ItemType Directory -Force "$HOME\.claude\skills", "$HOME\.claude\commands" | Out-Null
+Get-ChildItem PM-Cortex-Public\skills -Directory | Where-Object Name -ne 'commands' |
+  Copy-Item -Destination "$HOME\.claude\skills\" -Recurse -Force
+Copy-Item PM-Cortex-Public\skills\commands\*.md "$HOME\.claude\commands\" -Force
+```
+
+**macOS / Linux:**
+
+```bash
+git clone https://github.com/mir17881/PM-Cortex-Public.git
+mkdir -p ~/.claude/skills ~/.claude/commands
+for d in PM-Cortex-Public/skills/*/; do
+  [ "$(basename "$d")" = commands ] || cp -R "$d" ~/.claude/skills/
+done
+cp PM-Cortex-Public/skills/commands/*.md ~/.claude/commands/
+```
+
 Then invoke a skill by name, or run a workflow as a slash command:
 
 ```
